@@ -118,9 +118,9 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
+    "django.core.context_processors.static",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "staticfiles.context_processors.static_url",
     "baljan.ctx.actions",
     "baljan.ctx.analytics",
     "baljan.ctx.common",
@@ -142,15 +142,15 @@ INSTALLED_APPS = [
     # external
     #"mailer", # use django.core.mail instead
     "pagination",
-    "timezones",
-    "ajax_validation",
+    #"timezones",
+    #"ajax_validation",
     "uni_form",
-    "staticfiles",
+    #"staticfiles",
     "debug_toolbar",
     
     # project
     "baljan",
-    "brassbird",
+    #"brassbird",
     "mobile",
 
     "djcelery",
