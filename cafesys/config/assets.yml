@@ -5,7 +5,6 @@ compress_assets: off
 javascripts:
     workspace:
         - public/js/jquery-1.6.2.min.js
-        - public/pinax/js/base.js
         - public/js/jquery.plugins.js
         - public/js/jquery-ui-*.min.js
         - public/js/uni-form.jquery.js
@@ -23,9 +22,6 @@ javascripts:
 stylesheets:
     workspace:
         - public/bootstrap/assets/css/bootstrap-1.1.1.min.css
-        - public/pinax/css/facebox.css
-        - public/pinax/css/announcements.css
-        - public/pinax/css/accounts.css
         - public/uni_form/uni-form.css
         - public/uni_form/default.uni-form.css
         - public/css/960.css
