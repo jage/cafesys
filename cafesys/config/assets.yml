@@ -4,7 +4,7 @@ compress_assets: off
 
 javascripts:
     workspace:
-        - public/js/jquery-1.4.2.min.js
+        - public/js/jquery-1.6.2.min.js
         - public/pinax/js/base.js
         - public/js/jquery.plugins.js
         - public/js/jquery-ui-*.min.js
