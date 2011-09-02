@@ -22,6 +22,7 @@ javascripts:
 
 stylesheets:
     workspace:
+        - public/bootstrap/assets/css/bootstrap-1.1.1.min.css
         - public/pinax/css/facebox.css
         - public/pinax/css/announcements.css
         - public/pinax/css/accounts.css
