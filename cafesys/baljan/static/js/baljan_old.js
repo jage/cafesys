@@ -386,7 +386,7 @@ $(document).ready(function () {
         for (i in USER_IDS) {
             names.push(DRAGS[USER_IDS[i]]);
         }
-        availUsers.html(names.join(', '));
+        availUsers.html(names.join(' '));
 
         var redrawContained = function(cell) {
             var listed = [],
