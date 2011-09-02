@@ -10,6 +10,7 @@ def analytics(request):
 
 def common(request):
     return {
+        'FACEBOOK_ENABLED': getattr(settings, 'FACEBOOK_ENABLED', True),
         'KLIPP_WORTH': settings.KLIPP_WORTH,
         'CONTACT_EMAIL': settings.CONTACT_EMAIL,
         'CONTACT_PHONE': settings.CONTACT_PHONE,
