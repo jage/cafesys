@@ -21,7 +21,7 @@ javascripts:
 
 stylesheets:
     workspace:
-        - public/bootstrap/assets/css/bootstrap-1.1.1.min.css
+        - public/sass-twitter-bootstrap/bootstrap-1.1.1.min.css
         - public/uni_form/uni-form.css
         - public/uni_form/default.uni-form.css
         - public/css/960.css
