@@ -70,7 +70,7 @@ LANGUAGES = (
 MEDIA_AND_STATIC_VERSION = 13
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "media")
-MEDIA_URL = "/media%d/" % MEDIA_AND_STATIC_VERSION
+MEDIA_URL = "/media/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 STATIC_URL = "/static%d/" % MEDIA_AND_STATIC_VERSION
 
