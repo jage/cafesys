@@ -1,0 +1,3 @@
+[submodule "cafesys/baljan/static/sass-twitter-bootstrap"]
+	path = cafesys/baljan/static/sass-twitter-bootstrap
+	url = https://github.com/jlong/sass-twitter-bootstrap.git
