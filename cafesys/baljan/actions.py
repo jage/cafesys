@@ -47,7 +47,6 @@ def categories_and_actions(request):
             )),
         (settings.BOARD_GROUP, _('board tasks'), (
             Action(_('week planning'), 'baljan.views.call_duty_week'),
-            #Action(_('work applications'), '#', resolve_func=None),
             ) + tuple(upcoming_sem_actions) + (
             Action(_('semesters'), 'baljan.views.admin_semester'),
             )
@@ -60,8 +59,8 @@ def categories_and_actions(request):
             )),
         (settings.WORKER_GROUP, _('workers'), (
             Action(_('guide'), settings.STATIC_URL + 'baljan-tasks.pdf', resolve_func=None),
-            #Action(_('schedule'), 'cal.views.worker_calendar'),
-            #Action(_('swaps'), 'cal.views.swappable'),
+            Action(_('work planning'), 'baljan.views.current_semester'),
+            Action(_('work for Baljan'), 'become_worker'),
             )),
         ('regulars', _('your account'), (
             Action(_('profile'), 'baljan.views.profile'),
@@ -69,12 +68,9 @@ def categories_and_actions(request):
             Action(_('orders'), 'baljan.views.orders', args=(1,)),
             )),
         ('anyone', _('users'), (
-            Action(_('work planning'), 'baljan.views.current_semester'),
-            Action(_('work for Baljan'), 'become_worker'),
             Action(_('people and groups'), 'baljan.views.search_person'),
             Action(_('high score'), 'baljan.views.high_score'),
             Action(_('price list'), 'baljan.views.price_list'),
-            #Action(_('login'), 'acct_login') if student is None else Action(_('logout'), 'acct_logout'),
             )),
         )
     

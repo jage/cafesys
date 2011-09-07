@@ -16,12 +16,6 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = ''
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'admin@baljan.org'
-
 SITE_ID=1
 
 FACEBOOK_ENABLED = False

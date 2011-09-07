@@ -8,6 +8,7 @@ javascripts:
         - public/js/jquery.plugins.js
         - public/js/jquery-ui-*.min.js
         - public/js/uni-form.jquery.js
+        - public/js/baljan_old.js
         - public/js/baljan.js
     senchatouch:
         - public/mobile/underscore.js
@@ -22,11 +23,11 @@ javascripts:
 stylesheets:
     workspace:
         - public/sass-twitter-bootstrap/bootstrap-1.1.1.min.css
-        - public/uni_form/uni-form.css
-        - public/uni_form/default.uni-form.css
-        - public/css/960.css
-        - public/css/flick/jquery-ui-1.8.2.custom.css
-        - public/css/site_base.css
+        #- public/uni_form/uni-form.css
+        #- public/uni_form/default.uni-form.css
+        #- public/css/960.css
+        #- public/css/flick/jquery-ui-1.8.2.custom.css
+        #- public/css/site_base.css
         - public/css/baljan.css
     mobile:
         - public/mobile/css/*.css

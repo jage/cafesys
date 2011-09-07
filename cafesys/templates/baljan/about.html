@@ -8,89 +8,76 @@
 {% block body_class %}about{% endblock %}
 {% block body %}
 
-<h1>{% trans "About Baljan" %}</h1>
-<div class="grid_7 alpha main">
+<div class="row">
+    <div class="span12 columns">
+        <div>
+            {# TODO: Translate. #}
+            <h1>Mål och mening <small>Kaffe åt folket, helt enkelt.</small></h1>
+            <p>
+                Vi säljer kaffe, te, varm choklad, läsk, mackor och 
+                <abbr title="delicatoboll, punschrulle, mazarin, biskvi, hallongrotta med flera">
+                    klägg</abbr> till studentanpassade priser. Vi är helt idéella. Allt 
+                överskott återinvesteras i utrustning, möbler och vår fantastiska personal.
+            </p>
+        </div>
 
-    <div>
-        {# TODO: Translate. #}
-        <h2>Mål och mening</h2>
-        <p>
-            Kaffe åt folket! &mdash; helt enkelt. Vi säljer kaffe, te,
-            varm choklad, läsk, mackor och <span style="border-bottom:1px
-            dotted" title="dammsugare, chokladbollar, osv">klägg</span> till
-            studentanpassade priser. Vi är helt idéella. Allt överskott
-            återinvesteras i utrustning, möbler och vår fantastiska personal.
-        </p>
+        {% if FACEBOOK_ENABLED %}
+        <div>
+<iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FSektionscaf%25C3%25A9-Baljan%2F135878346468778&amp;width=700&amp;colorscheme=light&amp;show_faces=true&amp;border_color&amp;stream=true&amp;header=false&amp;height=558" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:700px; height:558px;" allowTransparency="true"></iframe>
+        </div>
+        {% else %}
+        <div class="alert-message info dev">
+            Facebook area.
+        </div>
+        {% endif %}
     </div>
+    
+    <div class="span4 columns">
+        <section id="open-hours"> 
+            <h2>{% trans "Open Hours" %}</h2>
+            <dl>
+                <dt>{% trans "weekdays" %}</dt>
+                <dd>{% trans "8:00 pm to 4:15 pm" %}<dd>
+                <dt>{% trans "weekends and holidays" %}</dt>
+                <dd>{% trans "closed" %}<dd>
+            </dl>
+            <p>
+            {% blocktrans %}
+            Open normal hours during mid-terms and finals. Closed during re-exams.
+            {% endblocktrans %}
+            </p>
+        </section>
 
-    {% if FACEBOOK_ENABLED %}
-    <div style="padding:10px">
-        <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FSektionscafe-Baljan%2F135878346468778&amp;width=520&amp;colorscheme=light&amp;connections=18&amp;stream=true&amp;header=false&amp;height=537" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:520px; height:537px;" allowTransparency="true"></iframe>
-    </div>
-    {% else %}
-    <div>
-        Facebook disabled.
-    </div>
-    {% endif %}
+        <section id="contact">
+            <h2>{% trans "Contact" %}</h2>
+            <p>
+            {% blocktrans with link as 'http://www.karservice.se/karallen/' %}
+            Baljan is located at the bottom floor of <a href="{{link}}">Kårallen</a>, 
+            campus Valla, Linköping.
+            {% endblocktrans %}
+            </p>
 
-    {% comment %}
-    TODO: This is a good place to include updates and whatnot. Facebook
-    integration, perhaps?
-    {% endcomment %}
-</div><!--.main-->
+            <dl>
+                <dt>{% trans "email" %}</dt>
+                <dd><a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></dd>
+                <dt>{% trans "phone" %}</dt>
+                <dd><a href="tel:{{CONTACT_PHONE}}">{{CONTACT_PHONE}}</a></dd>
+                <dt>{% trans "snail mail" %}</dt>
+                <dd>
+                    <address>
+                    {% blocktrans %}
+                    Sektionscafé Baljan<br/>
+                    Kårallen, universitetet<br/>
+                    581 83 Linköping<br/>
+                    Sweden
+                    {% endblocktrans %}
+                    </address>
+                </dd>
+            </dl>
+        </section>
+    </div>
+</div><!-- .row -->
 <div class="grid_3 omega secondary">
-    {# TODO: English link for Kårallen. Can't seem to find one. #}
-    {% blocktrans %}
-    <div>
-        <a href="http://www.flickr.com/photos/chipgriffin/2210297177/">
-            <img title="chipgriffin @ flickr"
-                 src="{{STATIC_URL}}img/flickr/2210297177_d5a88290b3.jpg"/>
-        </a>
-
-        <dl>
-            <dt>weekdays</dt>
-            <dd>8:00 pm to 4:15 pm<dd>
-            <dt>weekends, holidays</dt>
-            <dd>closed<dd>
-        </dl>
-        <p>
-        Open normal hours during mid-terms and final exams, but closed during re-exams.
-        </p>
-    </div>
-    {% endblocktrans %}
-
-    {% blocktrans %}
-    <div>
-        <a href="http://www.flickr.com/photos/20988296@N03/2133238064/">
-            <img title="MINGHE*luciano @ flickr" 
-                 src="{{STATIC_URL}}img/flickr/2133238064_b7a6f87cf2.jpg"/>
-        </a>
-        <p>
-        Baljan is located at the bottom floor of <a
-            href="http://www.karservice.se/karallen/">Kårallen</a>, 
-        campus Valla, Linköping.
-        </p>
-
-        <p>
-        <strong>email</strong><br/>
-        <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>
-        </p>
-
-        <p>
-        <strong>snail mail</strong><br/>
-        Sektionscafé Baljan<br/>
-        Kårallen, universitetet<br/>
-        581 83 Linköping<br/>
-        Sweden
-        </p>
-
-        <p>
-        <strong>phone</strong><br/>
-        <a href="tel:{{CONTACT_PHONE}}">{{CONTACT_PHONE}}</a>
-        </p>
-
-    </div>
-    {% endblocktrans %}
 </div><!--.secondary-->
 <div class="clean"></div>
 

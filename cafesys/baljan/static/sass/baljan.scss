@@ -1,0 +1,41 @@
+@import "preboot.scss";
+
+$dblue: #2732d4;
+$blue: #89aff7;
+$pink: #ff0084;
+$lpink: lighten($pink, 20%);
+
+body {
+    padding-top: 40px + 18px;
+}
+
+.dev:after {
+    content: '[dev]';
+}
+.dev {
+    font-family: monospace;
+}
+
+.board-week {
+    .chalkboard {
+        .ui-draggable, .ui-droppable span, .active {
+            cursor: pointer;
+        }
+        .ui-draggable {
+            @include gradientBar($blue, darken($blue, 15%));
+            @include border-radius;
+            color: #fff;
+            padding: 3px;
+        }
+        .drag {
+            @include gradientBar(lighten($lpink, 15%), $lpink);
+            @include border-radius;
+            color: #fff;
+            padding: 3px;
+        }
+        .active {
+            background: $lpink;
+            color: #fff;
+        }
+    }
+}

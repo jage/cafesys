@@ -6,29 +6,58 @@
 {% block body_class %}login{% endblock %}
 
 {% block body %}
-<h1>{% trans "Log in" %}</h1>
+<div class="row">
+    <div class="span12 columns">
+        {% if form.non_field_errors %}
+        <div class="alert-message error">
+            {% for error in form.non_field_errors %}
+            <p>
+                {{error}}
+            </p>
+            {% endfor %}
+        </div>
+        {% endif %}
 
-<div class="main">
-    <div class="confirmed-highlight">
+        <form method="post" action="{% url login %}" class="uniForm">
+            <input type="hidden" name="next" value="{{ next }}">
+            <fieldset>
+                <legend>{% trans "Log in" %}</legend>
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="clearfix {% if field.errors %}error{% endif %}">
+                    {{field.label_tag}}
+                    <div class="input">
+                        {{field}}
+                        <span class="help-inline">
+                            {{field.errors|join:", "}}
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="actions">
+                    <button type="submit" class="btn primary">{% trans "Log in" %}</button>
+                    <button type="reset" class="btn">{% trans "Reset" %}</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="span4 columns">
+        <div class="alert-message info">
+            <p>
+            {% blocktrans %}
+            You need a LiU student account (<em>abcde123</em>) to log in.
+            {% endblocktrans %}
+            </p>
+        </div>
+
+        <h2>{% trans "Cookies" %}</h2>
+        <p>
         {% blocktrans %}
-        You need a LiU student account (<em>abcde123</em>) to log in. 
-
-        In July 1, 2011, the Eletronic Communications Act 
-        (<a href="https://lagen.nu/2003:389">2003:389</a>) was changed.
+        In July 1, 2011, the Eletronic Communications Act (2003:389) was changed.
         By logging in, you accept that the site stores cookies on your
         device in order to keep a session.
         {% endblocktrans %}
+        </p>
     </div>
-
-    <div>
-        <form method="post" action="{% url login %}" class="uniForm">
-        {% csrf_token %}
-        {{form|as_uni_form}}
-        <div class="buttonHolder">
-            <input name="submit" class="submit submitButton" type="submit" value="{% trans "Log in" %}">
-        </div>
-        <input type="hidden" name="next" value="{{ next }}">
-        </form>
-    </div>
-</div>
+</div><!-- .row -->
 {% endblock body %}

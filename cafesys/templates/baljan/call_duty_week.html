@@ -13,13 +13,17 @@
         <thead>
         <tr>
             <th class="week">
-                <a href="{% url baljan.views.call_duty_week prev_y prev_w %}">
+                <a class="btn" title="{% trans "previous week" %}"
+                    href="{% url baljan.views.call_duty_week prev_y prev_w %}">
                     &laquo;
                 </a>
-                <span class="num">{{year}}</span> 
-                    {%trans "wk."%} 
-                <span class="num">{{week}}</span>
-                <a href="{% url baljan.views.call_duty_week next_y next_w %}">
+                <span class="btn disabled">
+                    <span class="num">{{year}}</span> 
+                        {%trans "wk."%} 
+                    <span class="num">{{week}}</span>
+                </span>
+                <a class="btn" title="{% trans "next week" %}"
+                    href="{% url baljan.views.call_duty_week next_y next_w %}">
                     &raquo;
                 </a>
             </th>
@@ -61,11 +65,13 @@
         </tr>
         </tbody>
     </table>
-    <h2>{% trans "Available Users" %} ({%trans "drag and drop"%})</h2>
-    <div class="available-users"></div>
-    <div class="submit">
-        <a href="{{request.path}}">{% trans "revert unsaved changes" %}</a>
-        <span class="link save">{% trans "save" %}</span>
+    <div>
+        <h2>{% trans "Available Users" %} <small>{%trans "Drag and drop."%}</small></h2>
+        <div class="available-users"></div>
+        <div class="well submit">
+            <button class="btn primary save">{% trans "save" %}</button>
+            <a class="btn" href="{{request.path}}">{% trans "revert unsaved changes" %}</a>
+        </div>
     </div>
 </div>
 {% endblock %}

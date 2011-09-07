@@ -43,14 +43,21 @@ class Command(BaseCommand):
                 '--trace',
             ])
 
+            self.procs['coffee'] = Popen([
+                'coffee',
+                '-wbo',
+                'baljan/static/js',
+                'baljan/static/coffee',
+            ])
+
             wm = pyinotify.WatchManager()
             handler = OnWriteHandler(
                 cwd=settings.PROJECT_ROOT, 
-                extension='css',
+                extension='css,js',
                 cmd='jammit',
             )
             notifier = pyinotify.Notifier(wm, default_proc_fun=handler)
-            wm.add_watch('baljan/static/css', pyinotify.ALL_EVENTS, rec=True, auto_add=True)
+            wm.add_watch('baljan/static', pyinotify.ALL_EVENTS, rec=True, auto_add=True)
             notifier.loop()
         except KeyboardInterrupt, e:
             self.tear_down()

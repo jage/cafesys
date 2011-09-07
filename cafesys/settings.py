@@ -166,9 +166,6 @@ INSTALLED_APPS = [
     "south",
 ]
 
-import logging
-logging.basicConfig(level=logging.INFO)
-
 SENTRY_THRASHING_TIMEOUT = 0
 SENTRY_TESTING = True
 SENTRY_FILTERS = (
@@ -254,11 +251,14 @@ BROKER_USER = "guest"
 BROKER_PASSWORd = "guest"
 BROKER_VHOST = "/"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+LOG_DIR = os.path.join(PROJECT_ROOT, os.path.pardir, 'logs')
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(LOG_DIR, 'mail')
 EMAIL_HOST = ''
 EMAIL_PORT = 25
 EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'noreply@ejlert.spantz.org'
+DEFAULT_FROM_EMAIL = 'admin@baljan.org'
 
 LDAP_SERVER = 'ldap://lukas-backend.unit.liu.se'
 LDAP_ENABLED = True
@@ -308,6 +308,74 @@ ANALYTICS_KEY= ''
 STATS_CACHE = True
 
 BRASSBIRD_INTERFACE = 'baljan.brassbird'
+
+def _filelog(**kwargs):
+    fnkey = 'filename'
+    if fnkey in kwargs:
+        kwargs[fnkey] = os.path.join(LOG_DIR, kwargs[fnkey])
+
+    base = {
+        'level': 'DEBUG',
+        'class': 'logging.handlers.RotatingFileHandler',
+        'maxBytes': 50*1024*1024,
+        'backupCount': 5,
+        'formatter': 'simple',
+    }
+    base.update(kwargs)
+    return base
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'django.utils.log.NullHandler',
+        },
+        'django_file': _filelog(filename='django.log'),
+        'database_file': _filelog(filename='database.log'),
+        'baljan_file': _filelog(filename='baljan.log'),
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['django_file'],
+            'propagate': True,
+            'level':'DEBUG',
+        },
+        'django.db': {
+            'handlers': ['database_file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'baljan': {
+            'handlers': ['baljan_file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    }
+}
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
