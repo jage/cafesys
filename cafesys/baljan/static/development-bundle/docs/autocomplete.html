@@ -26,9 +26,9 @@
 <p>The third variation, the callback, provides the most flexibility, and can be used to connect any data source to Autocomplete. The callback gets two arguments:</p>
 <ul>
 <li>A request object, with a single property called "term", which refers to the value currently in the text input. For example, when the user entered "new yo" in a city field, the Autocomplete term will equal "new yo".</li>
-<li>A response callback, which expects a single argument to contain the data to suggest to the user. This data should be filtered based on the provided term, and can be in any of the formats described above for simple local data (String-Array or Object-Array with label/value/both properties).</li>
+<li>A response callback, which expects a single argument to contain the data to suggest to the user. This data should be filtered based on the provided term, and can be in any of the formats described above for simple local data (String-Array or Object-Array with label/value/both properties). It's important when providing a custom source callback to handle errors during the request. You must always call the response callback even if you encounter an error. This ensures that the widget always has the correct state.</li>
 </ul>
-<p>The demos all focus on different variations of the source-option - look for the one that matches your use case, and take a look at the code.</p>
+<p>The label is always treated as text, if you want the label to be treated as html you can use <a href="https://github.com/scottgonzalez/jquery-ui-extensions/blob/master/autocomplete/jquery.ui.autocomplete.html.js" class="external text" title="https://github.com/scottgonzalez/jquery-ui-extensions/blob/master/autocomplete/jquery.ui.autocomplete.html.js">Scott González' html extension</a>. The demos all focus on different variations of the source-option - look for the one that matches your use case, and take a look at the code.</p>
     </div>
     <div id="overview-dependencies">
         <h3>Dependencies</h3>
@@ -55,7 +55,7 @@ A simple jQuery UI Autocomplete.<br />
 &lt;html&gt;
 &lt;head&gt;
   &lt;link href=&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
-  &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
   
   &lt;script&gt;
@@ -116,6 +116,90 @@ A simple jQuery UI Autocomplete.<br />
 var disabled = $( ".selector" ).autocomplete( "option", "disabled" );
 //setter
 $( ".selector" ).autocomplete( "option", "disabled", true );</code></pre>
+</dd>
+
+    </dl>
+  </div>
+</li>
+
+
+<li class="option" id="option-appendTo">
+  <div class="option-header">
+    <h3 class="option-name"><a href="#option-appendTo">appendTo</a></h3>
+    <dl>
+      <dt class="option-type-label">Type:</dt>
+        <dd class="option-type">Selector</dd>
+      
+      <dt class="option-default-label">Default:</dt>
+        <dd class="option-default">"body"</dd>
+      
+    </dl>
+  </div>
+  <div class="option-description">
+    <p>Which element the menu should be appended to.</p>
+  </div>
+  <div class="option-examples">
+    <h4>Code examples</h4>
+    <dl class="option-examples-list">
+    
+<dt>
+  Initialize a autocomplete with the <code>appendTo</code> option specified.
+</dt>
+<dd>
+<pre><code>$( ".selector" ).autocomplete({ appendTo: "#someElem" });</code></pre>
+</dd>
+
+    
+<dt>
+  Get or set the <code>appendTo</code> option, after init.
+</dt>
+<dd>
+<pre><code>//getter
+var appendTo = $( ".selector" ).autocomplete( "option", "appendTo" );
+//setter
+$( ".selector" ).autocomplete( "option", "appendTo", "#someElem" );</code></pre>
+</dd>
+
+    </dl>
+  </div>
+</li>
+
+
+<li class="option" id="option-autoFocus">
+  <div class="option-header">
+    <h3 class="option-name"><a href="#option-autoFocus">autoFocus</a></h3>
+    <dl>
+      <dt class="option-type-label">Type:</dt>
+        <dd class="option-type">Boolean</dd>
+      
+      <dt class="option-default-label">Default:</dt>
+        <dd class="option-default">false</dd>
+      
+    </dl>
+  </div>
+  <div class="option-description">
+    <p>If set to true the first item will be automatically focused.</p>
+  </div>
+  <div class="option-examples">
+    <h4>Code examples</h4>
+    <dl class="option-examples-list">
+    
+<dt>
+  Initialize a autocomplete with the <code>autoFocus</code> option specified.
+</dt>
+<dd>
+<pre><code>$( ".selector" ).autocomplete({ autoFocus: true });</code></pre>
+</dd>
+
+    
+<dt>
+  Get or set the <code>autoFocus</code> option, after init.
+</dt>
+<dd>
+<pre><code>//getter
+var autoFocus = $( ".selector" ).autocomplete( "option", "autoFocus" );
+//setter
+$( ".selector" ).autocomplete( "option", "autoFocus", true );</code></pre>
 </dd>
 
     </dl>
@@ -207,6 +291,48 @@ $( ".selector" ).autocomplete( "option", "minLength", 0 );</code></pre>
 </li>
 
 
+<li class="option" id="option-position">
+  <div class="option-header">
+    <h3 class="option-name"><a href="#option-position">position</a></h3>
+    <dl>
+      <dt class="option-type-label">Type:</dt>
+        <dd class="option-type">Object</dd>
+      
+      <dt class="option-default-label">Default:</dt>
+        <dd class="option-default">{ my: &quot;left top&quot;, at: &quot;left bottom&quot;, collision: &quot;none&quot; }</dd>
+      
+    </dl>
+  </div>
+  <div class="option-description">
+    <p>Identifies the position of the Autocomplete widget in relation to the associated input element. The "of" option defaults to the input element, but you can specify another element to position against. You can refer to the <a href="http://docs.jquery.com/UI/Position" class="external text" title="http://docs.jquery.com/UI/Position">jQuery UI Position</a> utility for more details about the various options.</p>
+  </div>
+  <div class="option-examples">
+    <h4>Code examples</h4>
+    <dl class="option-examples-list">
+    
+<dt>
+  Initialize a autocomplete with the <code>position</code> option specified.
+</dt>
+<dd>
+<pre><code>$( ".selector" ).autocomplete({ position: { my : &quot;right top&quot;, at: &quot;right bottom&quot; } });</code></pre>
+</dd>
+
+    
+<dt>
+  Get or set the <code>position</code> option, after init.
+</dt>
+<dd>
+<pre><code>//getter
+var position = $( ".selector" ).autocomplete( "option", "position" );
+//setter
+$( ".selector" ).autocomplete( "option", "position", { my : &quot;right top&quot;, at: &quot;right bottom&quot; } );</code></pre>
+</dd>
+
+    </dl>
+  </div>
+</li>
+
+
 <li class="option" id="option-source">
   <div class="option-header">
     <h3 class="option-name"><a href="#option-source">source</a></h3>
@@ -255,6 +381,45 @@ $( ".selector" ).autocomplete( "option", "source", [&quot;c++&quot;, &quot;java&
     <h2 class="top-header">Events</h2>
     <ul class="events-list">
       
+<li class="event" id="event-create">
+  <div class="event-header">
+    <h3 class="event-name"><a href="#event-create">create</a></h3>
+    <dl>
+      <dt class="event-type-label">Type:</dt>
+        <dd class="event-type">autocompletecreate</dd>
+    </dl>
+  </div>
+  <div class="event-description">
+    <p>This event is triggered when autocomplete is created.</p>
+  </div>
+  <div class="event-examples">
+    <h4>Code examples</h4>
+    <dl class="event-examples-list">
+    
+<dt>
+  Supply a callback function to handle the <code>create</code> event as an init option.
+</dt>
+<dd>
+<pre><code>$( &quot;.selector&quot; ).autocomplete({
+   create: function(event, ui) { ... }
+});</code></pre>
+</dd>
+
+    
+<dt>
+  Bind to the <code>create</code> event by type: <code>autocompletecreate</code>.
+</dt>
+<dd>
+<pre><code>$( &quot;.selector&quot; ).bind( &quot;autocompletecreate&quot;, function(event, ui) {
+  ...
+});</code></pre>
+</dd>
+
+    </dl>
+  </div>
+</li>
+
+
 <li class="event" id="event-search">
   <div class="event-header">
     <h3 class="event-name"><a href="#event-search">search</a></h3>
@@ -459,7 +624,7 @@ $( ".selector" ).autocomplete( "option", "source", [&quot;c++&quot;, &quot;java&
     </dl>
   </div>
   <div class="event-description">
-    <p>After an item was selected; ui.item refers to the selected item. Always triggered after the close event.</p>
+    <p>Triggered when the field is blurred, if the value has changed; ui.item refers to the selected item.</p>
   </div>
   <div class="event-examples">
     <h4>Code examples</h4>
@@ -679,15 +844,15 @@ $( ".selector" ).autocomplete( "option", "source", [&quot;c++&quot;, &quot;java&
 </p>
     
   <h3>Sample markup with jQuery UI CSS Framework classes</h3>
-  &lt;input class=&quot;ui-autocomplete-input&quot;/&gt;<br />
-&lt;ul class=&quot;ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all&quot;&gt;<br />
-&nbsp;&nbsp;&lt;li class=&quot;ui-menu-item&quot;&gt;<br />
+  &lt;input class=&quot;<strong>ui-autocomplete-input</strong>&quot;/&gt;<br />
+&lt;ul class=&quot;<strong>ui-autocomplete</strong> <strong>ui-menu</strong> ui-widget ui-widget-content ui-corner-all&quot;&gt;<br />
+&nbsp;&nbsp;&lt;li class=&quot;<strong>ui-menu-item</strong>&quot;&gt;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=&quot;ui-corner-all&quot;&gt;item 1&lt;/a&gt;<br />
 &nbsp;&nbsp;&lt;/li&gt;<br />
-&nbsp;&nbsp;&lt;li class=&quot;ui-menu-item&quot;&gt;<br />
+&nbsp;&nbsp;&lt;li class=&quot;<strong>ui-menu-item</strong>&quot;&gt;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=&quot;ui-corner-all&quot;&gt;item 2&lt;/a&gt;<br />
 &nbsp;&nbsp;&lt;/li&gt;<br />
-&nbsp;&nbsp;&lt;li class=&quot;ui-menu-item&quot;&gt;<br />
+&nbsp;&nbsp;&lt;li class=&quot;<strong>ui-menu-item</strong>&quot;&gt;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;a class=&quot;ui-corner-all&quot;&gt;item 3&lt;/a&gt;<br />
 &nbsp;&nbsp;&lt;/li&gt;<br />
 &lt;/ul&gt;
@@ -701,10 +866,10 @@ $( ".selector" ).autocomplete( "option", "source", [&quot;c++&quot;, &quot;java&
 </div>
 
 </p><!-- 
-Pre-expand include size: 29860 bytes
-Post-expand include size: 48463 bytes
-Template argument size: 26753 bytes
+Pre-expand include size: 35982 bytes
+Post-expand include size: 61393 bytes
+Template argument size: 33841 bytes
 Maximum: 2097152 bytes
 -->
 
-<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:3766-1!1!0!!en!2 and timestamp 20100520115459 -->
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:3766-1!1!0!!en!2 and timestamp 20110815133304 -->

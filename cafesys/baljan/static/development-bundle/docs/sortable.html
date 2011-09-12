@@ -26,6 +26,8 @@
         <h3>Dependencies</h3>
         <ul>
 <li>UI Core</li>
+<li>UI Widget</li>
+<li>UI Mouse</li>
 </ul>
     </div>
     <div id="overview-example">
@@ -43,7 +45,7 @@ A simple jQuery UI Sortable.<br />
 &lt;html&gt;
 &lt;head&gt;
   &lt;link href=&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
-  &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js&quot;&gt;&lt;/script&gt;
   &lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
   
   &lt;script&gt;
@@ -296,7 +298,8 @@ $( ".selector" ).sortable( "option", "connectWith", '.otherlist' );</code></pre>
     </dl>
   </div>
   <div class="option-description">
-    <p>Constrains dragging to within the bounds of the specified element - can be a DOM element, 'parent', 'document', 'window', or a jQuery selector.</p>
+    <p>Constrains dragging to within the bounds of the specified element - can be a DOM element, 'parent', 'document', 'window', or a jQuery selector.
+</p><p>Note: the element specified for containment must have a calculated width and height (though it need not be explicit), so for example, if you have float:left sortable children and specify containment:'parent' be sure to have float:left on the sortable/parent container as well or it will have height: 0, causing undefined behavior.</p>
   </div>
   <div class="option-examples">
     <h4>Code examples</h4>
@@ -1134,6 +1137,45 @@ $( ".selector" ).sortable( "option", "zIndex", 5 );</code></pre>
     <h2 class="top-header">Events</h2>
     <ul class="events-list">
       
+<li class="event" id="event-create">
+  <div class="event-header">
+    <h3 class="event-name"><a href="#event-create">create</a></h3>
+    <dl>
+      <dt class="event-type-label">Type:</dt>
+        <dd class="event-type">sortcreate</dd>
+    </dl>
+  </div>
+  <div class="event-description">
+    <p>This event is triggered when sortable is created.</p>
+  </div>
+  <div class="event-examples">
+    <h4>Code examples</h4>
+    <dl class="event-examples-list">
+    
+<dt>
+  Supply a callback function to handle the <code>create</code> event as an init option.
+</dt>
+<dd>
+<pre><code>$( &quot;.selector&quot; ).sortable({
+   create: function(event, ui) { ... }
+});</code></pre>
+</dd>
+
+    
+<dt>
+  Bind to the <code>create</code> event by type: <code>sortcreate</code>.
+</dt>
+<dd>
+<pre><code>$( &quot;.selector&quot; ).bind( &quot;sortcreate&quot;, function(event, ui) {
+  ...
+});</code></pre>
+</dd>
+
+    </dl>
+  </div>
+</li>
+
+
 <li class="event" id="event-start">
   <div class="event-header">
     <h3 class="event-name"><a href="#event-start">start</a></h3>
@@ -1884,7 +1926,8 @@ $( ".selector" ).sortable( "option", "zIndex", 5 );</code></pre>
   <h3>Sample markup with jQuery UI CSS Framework classes</h3>
   &lt;ul class=&quot;<strong>ui-sortable</strong>&quot;&gt;<br />
 &#160;&#160;&#160;&lt;li&gt;&lt;/li&gt;<br />
-&#160;&#160;&#160;&lt;li&gt;&lt;/li&gt;<br />
+&#160;&#160;&#160;&lt;li class=&quot;<strong>ui-sortable-helper</strong>&quot;&gt;&lt;/li&gt;<br />
+&#160;&#160;&#160;&lt;li class=&quot;<strong>ui-sortable-placeholder</strong>&quot;&gt;&lt;/li&gt;<br />
 &#160;&#160;&#160;&lt;li&gt;&lt;/li&gt;<br />
 &lt;/ul&gt;
   <p class="theme-note">
@@ -1901,10 +1944,10 @@ $( ".selector" ).sortable( "option", "zIndex", 5 );</code></pre>
 </div>
 
 </p><!-- 
-Pre-expand include size: 73453 bytes
-Post-expand include size: 125878 bytes
-Template argument size: 71570 bytes
+Pre-expand include size: 75037 bytes
+Post-expand include size: 131543 bytes
+Template argument size: 73917 bytes
 Maximum: 2097152 bytes
 -->
 
-<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:3772-1!1!0!!en!2 and timestamp 20100520112014 -->
+<!-- Saved in parser cache with key jqdocs_docs:pcache:idhash:3772-1!1!0!!en!2 and timestamp 20110815120731 -->
