@@ -16,13 +16,6 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_HOST = 'smtp.bahnhof.se'
-EMAIL_HOST = ''
-EMAIL_PORT = 25
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'noreply@ejlert.spantz.org'
-
 SITE_ID=2
 
 # For importing data from the old system. There is a management command

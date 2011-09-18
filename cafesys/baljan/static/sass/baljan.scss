@@ -4,6 +4,9 @@ $dblue: #2732d4;
 $blue: #89aff7;
 $pink: #ff0084;
 $lpink: lighten($pink, 20%);
+$gray: #ddd;
+$highlight-bg: #ffa;
+$highlight-fg: #330;
 
 body {
     padding-top: 40px + 18px;
@@ -14,6 +17,34 @@ body {
 }
 .dev {
     font-family: monospace;
+}
+
+.admin-link {
+    $bg: #ccc;
+    $fg: #eee;
+    @include gradientBar($bg, darken($bg, 15%));
+    @include border-radius;
+    border: 1px solid darken($bg, 20%);
+    padding: 2px 4px;
+    margin-bottom: 3px;
+    float: right;
+    display: inline-block;
+    color: #fff;
+    a {
+        font-weight: bold;
+        color: $fg;
+        &:hover {
+            color: lighten($fg, 100%);
+            text-decoration: none;
+        }
+    }
+}
+
+.alert-message {
+    a {
+        color: inherit;
+        font-weight: bold;
+    }
 }
 
 .board-week {
@@ -28,14 +59,100 @@ body {
             padding: 3px;
         }
         .drag {
-            @include gradientBar(lighten($lpink, 15%), $lpink);
+            @include gradientBar(lighten($blue, 15%), $blue);
             @include border-radius;
             color: #fff;
             padding: 3px;
         }
         .active {
-            background: $lpink;
+            background: $blue;
             color: #fff;
         }
+        table .droppable {
+            width: 20%;
+            border: {
+                left: 1px solid $gray;
+            }
+        }
     }
+}
+
+body.user {
+    .friend-request {
+        text-align: center;
+    }
+}
+
+body.admin-semester {
+    .month {
+        h2, .am-lunch-pm, .shift {
+            text-align: center;
+        }
+        .highlight {
+            background: $highlight-bg;
+            color: $highlight-fg;
+        }
+        table {
+            th, td {
+                padding: 0;
+            }
+            font-size: 11px;
+        }
+        $pad: 1.5%;
+        width: floor(33.3% - $pad);
+        margin-right: $pad;
+        float: left;
+
+        .day {
+            width: 10%;
+            text-align: right;
+        }
+        .shift {
+            width: 35%;
+            &.span-1 {
+                width: 20%;
+            }
+            .taken {
+                color: #bbb;
+            }
+        }
+    }
+
+    .ui-selected, .ui-selecting {
+        div {
+            background: transparentize($pink, 0.5);
+        }
+    }
+
+    .box {
+        width: 2em;
+        display: block;
+        margin-right: .3em;
+        float: left;
+    }
+
+    $ep: #a33;
+    .exam-period {
+        @include gradientBar($ep, darken($ep, 15%));
+        color: #fff;
+    }
+    $closed: #111;
+    .closed {
+        @include gradientBar($closed, darken($closed, 15%));
+        color: #fff;
+    }
+    $norm: #fff;
+    .normal {
+        @include gradientBar($norm, darken($norm, 15%));
+        color: #111;
+    }
+
+    .selection input {
+        margin-bottom: 1px;
+        width: $gridColumnWidth * 3;
+    }
+}
+
+section {
+    margin-bottom: 18px * 3;
 }

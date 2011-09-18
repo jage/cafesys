@@ -580,7 +580,8 @@ $(document).ready(function () {
             $('.show-new-sem-dialog').click();
         }
         $('.selection input').click(function() {
-            editShiftsForm.find('input[name=make]').attr('value', $(this).attr('class'));
+            var makeAction = $(this).attr('id').split('-')[1];
+            editShiftsForm.find('input[name=make]').attr('value', makeAction);
             var shiftIds = [];
             $('table td.ui-selected').each(function() {
                 shiftIds.push(parseInt($(this).attr('id').split('-')[1], 10));

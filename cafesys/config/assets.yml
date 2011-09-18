@@ -8,6 +8,7 @@ javascripts:
         - public/js/jquery.plugins.js
         - public/js/jquery-ui-*.min.js
         - public/js/uni-form.jquery.js
+        - public/mobile/underscore.js
         - public/js/baljan_old.js
         - public/js/baljan.js
     senchatouch:

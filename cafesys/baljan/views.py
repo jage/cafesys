@@ -750,9 +750,9 @@ def admin_semester(request, name=None):
 
             if make == 'normal':
                 shifts_to_edit.update(exam_period=False, enabled=True)
-            elif make == 'disabled':
+            elif make == 'closed':
                 shifts_to_edit.update(exam_period=False, enabled=False)
-            elif make == 'exam-period':
+            elif make == 'examperiod':
                 shifts_to_edit.update(exam_period=True, enabled=True)
             elif make == 'none':
                 pass
